@@ -1,0 +1,12 @@
+{
+  "name": "育儿助手",
+  "short_name": "育儿助手",
+  "description": "从孕期到宝宝成长的全面育儿辅助工具",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f5f5f7",
+  "theme_color": "#4a90d9",
+  "icons": [
+    { "src": "/vite.svg", "sizes": "any" }
+  ]
+}
