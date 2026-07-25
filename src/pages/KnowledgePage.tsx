@@ -1,24 +1,40 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Heart, ChevronDown, ChevronUp, UtensilsCrossed, Home } from 'lucide-react';
+import { Heart, ChevronDown, ChevronUp, UtensilsCrossed, MessageCircle, ChefHat } from 'lucide-react';
 import {
   pregnancyNutrients, pregnancyDietGuide, hospitalBagList, postpartumRecovery,
   feedingGuide, babySleepGuide, sleepTrainingMethods, easyRoutines,
 } from '../data/knowledge';
-import { dailyServings, weeklyMealPlan, trimesterMealTips, breastmilkStorage, newbornCareBasics, breastfeedingChecklist, engorgementCare, blockedDuctCare, mastitisSigns } from '../data/recipes';
+import { dailyServings, weeklyMealPlan, trimesterMealTips, breastmilkStorage, newbornCareBasics, breastfeedingChecklist, engorgementCare, blockedDuctCare, mastitisSigns, chineseRecipes, chineseWeeklyMealPlan } from '../data/recipes';
+import Checklist from '../components/Checklist';
+import KnowledgeChat from '../components/KnowledgeChat';
 
 export default function KnowledgePage() {
   const [searchParams] = useSearchParams();
   const initialTab = searchParams.get('tab') || 'diet';
   const [tab, setTab] = useState(initialTab);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [showChat, setShowChat] = useState(false);
   const toggle = (id: string) => setExpanded(expanded === id ? null : id);
 
   return (
     <div>
+      {showChat && <KnowledgeChat onClose={() => setShowChat(false)} />}
+      <button
+        onClick={() => setShowChat(true)}
+        style={{
+          position: 'fixed', bottom: 100, right: 16, zIndex: 150,
+          width: 48, height: 48, borderRadius: '50%', background: 'var(--primary)',
+          color: '#fff', border: 'none', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}
+      >
+        <MessageCircle size={22} />
+      </button>
       <div className="tabs" style={{ flexWrap: 'wrap' }}>
         <button className={'tab' + (tab === 'diet' ? ' active' : '')} onClick={() => setTab('diet')}>孕期饮食</button>
         <button className={'tab' + (tab === 'recipes' ? ' active' : '')} onClick={() => setTab('recipes')}><UtensilsCrossed size={14} style={{ verticalAlign: 'middle', marginRight: 4 }} />孕期食谱</button>
+        <button className={'tab' + (tab === 'chinese' ? ' active' : '')} onClick={() => setTab('chinese')}><ChefHat size={14} style={{ verticalAlign: 'middle', marginRight: 4 }} />中式食谱</button>
         <button className={'tab' + (tab === 'feeding' ? ' active' : '')} onClick={() => setTab('feeding')}>宝宝喂养</button>
         <button className={'tab' + (tab === 'sleep' ? ' active' : '')} onClick={() => setTab('sleep')}>宝宝睡眠</button>
         <button className={'tab' + (tab === 'bag' ? ' active' : '')} onClick={() => setTab('bag')}>待产清单</button>
@@ -199,41 +215,10 @@ export default function KnowledgePage() {
       )}
 
       {tab === 'bag' && (
-        <div className="card">
-          <div className="card-header"><span className="card-title"><Home size={18} /> 待产包清单</span></div>
-          <div className="accordion">
-            <div className="accordion-header" onClick={() => toggle('bag-m')}>
-              <span>👩 妈妈用品 ({hospitalBagList.mother.length}项)</span>
-              {expanded === 'bag-m' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-            </div>
-            {expanded === 'bag-m' && (
-              <div className="accordion-body">
-                {hospitalBagList.mother.map((item, i) => <div key={i} style={{ padding: '4px 0' }}>☐ {item}</div>)}
-              </div>
-            )}
-          </div>
-          <div className="accordion">
-            <div className="accordion-header" onClick={() => toggle('bag-b')}>
-              <span>👶 宝宝用品 ({hospitalBagList.baby.length}项)</span>
-              {expanded === 'bag-b' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-            </div>
-            {expanded === 'bag-b' && (
-              <div className="accordion-body">
-                {hospitalBagList.baby.map((item, i) => <div key={i} style={{ padding: '4px 0' }}>☐ {item}</div>)}
-              </div>
-            )}
-          </div>
-          <div className="accordion">
-            <div className="accordion-header" onClick={() => toggle('bag-o')}>
-              <span>📋 其他 ({hospitalBagList.others.length}项)</span>
-              {expanded === 'bag-o' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-            </div>
-            {expanded === 'bag-o' && (
-              <div className="accordion-body">
-                {hospitalBagList.others.map((item, i) => <div key={i} style={{ padding: '4px 0' }}>☐ {item}</div>)}
-              </div>
-            )}
-          </div>
+        <div>
+          <Checklist listId="bag-mother" title="👩 妈妈用品" icon="" items={hospitalBagList.mother.map(t => ({ text: t }))} />
+          <Checklist listId="bag-baby" title="👶 宝宝用品" icon="" items={hospitalBagList.baby.map(t => ({ text: t }))} />
+          <Checklist listId="bag-other" title="📋 其他" icon="" items={hospitalBagList.others.map(t => ({ text: t }))} />
         </div>
       )}
 
@@ -292,6 +277,76 @@ export default function KnowledgePage() {
           </div>
         </div>
       )}
+      
+      {tab === 'chinese' && (
+        <div>
+          <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 12 }}>
+            中式孕期食谱——海鲜、牛肉、猪肉、鸡肉、时令蔬菜，按三孕期分类
+          </div>
+          {/* Weekly plan */}
+          <div className="card">
+            <div className="card-header"><span className="card-title"><ChefHat size={18} /> 七日食谱推荐</span></div>
+            <div style={{ display: 'flex', gap: 4, marginBottom: 12 }}>
+              {Object.keys(chineseWeeklyMealPlan).map(key => (
+                <button key={key} className={'btn btn-sm ' + (expanded === 'week-' + key ? 'btn-primary' : 'btn-secondary')} onClick={() => toggle('week-' + key)}>
+                  {key}
+                </button>
+              ))}
+            </div>
+            {(expanded && expanded.startsWith('week-') && chineseWeeklyMealPlan[expanded.replace('week-', '') as keyof typeof chineseWeeklyMealPlan]) && (
+              <div>
+                {chineseWeeklyMealPlan[expanded.replace('week-', '') as keyof typeof chineseWeeklyMealPlan]?.map((day, i) => (
+                  <div key={i} style={{ padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
+                    <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 6 }}>第{i + 1}天</div>
+                    <div style={{ fontSize: 12, lineHeight: 1.8, color: 'var(--text-secondary)' }}>
+                      <p>🌅 早餐：{day.breakfast}</p>
+                      <p>☀️ 午餐：{day.lunch}</p>
+                      <p>🌙 晚餐：{day.dinner}</p>
+                      <p>🍪 加餐：{day.snack}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Recipe cards */}
+          {(['海鲜', '牛肉', '猪肉', '鸡肉', '蔬菜', '汤羹'] as const).map(cat => {
+            const recipes = chineseRecipes.filter(r => r.category === cat);
+            if (recipes.length === 0) return null;
+            return (
+              <div key={cat} style={{ marginBottom: 8 }}>
+                <div className="section-title">{cat}</div>
+                {recipes.map((r, i) => (
+                  <div className="card" key={i}>
+                    <div className="accordion">
+                      <div className="accordion-header" onClick={() => toggle('recipe-' + r.name)} style={{ borderBottom: 'none' }}>
+                        <div>
+                          <span style={{ fontWeight: 600, fontSize: 14 }}>{r.name}</span>
+                          <div style={{ display: 'flex', gap: 4, marginTop: 2 }}>
+                            <span className="chip chip-info" style={{ fontSize: 10 }}>{r.mealType}</span>
+                            {r.trimester.map(t => <span key={t} className="chip" style={{ fontSize: 10, background: '#ede9fe', color: '#7c3aed' }}>{t === 'first' ? '孕早期' : t === 'second' ? '孕中期' : '孕晚期'}</span>)}
+                          </div>
+                        </div>
+                        {expanded === 'recipe-' + r.name ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                      </div>
+                      {expanded === 'recipe-' + r.name && (
+                        <div className="accordion-body">
+                          <p><strong>食材：</strong>{r.ingredients}</p>
+                          <p style={{ marginTop: 4 }}><strong>做法：</strong>{r.method}</p>
+                          <p style={{ marginTop: 4, color: 'var(--success)' }}><strong>营养：</strong>{r.nutrition}</p>
+                          <p style={{ marginTop: 4, fontSize: 12, color: 'var(--text-secondary)' }}>💡 {r.tips}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            );
+          })}
+        </div>
+      )}
+
       {tab === 'breastmilk' && (
         <div>
           <div className="card">

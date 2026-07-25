@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Baby, Droplets, Moon, Activity, Clock, TrendingUp, CalendarDays, Heart, BookOpen, Stethoscope } from 'lucide-react';
 import IllusImage from '../components/IllusImage';
+import { generateAdvice, AdviceCard } from '../components/DynamicAdvice';
 import { loadData, saveData } from '../data/store';
-import type { BabyProfile, FeedRecord, SleepRecord, DiaperRecord } from '../data/knowledge';
+import type { BabyProfile, FeedRecord, SleepRecord, DiaperRecord, GrowthRecord } from '../data/knowledge';
 import { pregnancyWeeks, getAgeEducation } from '../data/knowledge';
 
 export default function HomePage() {
@@ -12,6 +13,7 @@ export default function HomePage() {
   const [feeds, setFeeds] = useState<FeedRecord[]>([]);
   const [sleeps, setSleeps] = useState<SleepRecord[]>([]);
   const [diapers, setDiapers] = useState<DiaperRecord[]>([]);
+  const [growths] = useState<GrowthRecord[]>(() => loadData<GrowthRecord[]>('growths', []));
   const [mode, setMode] = useState<'pregnancy' | 'baby'>('pregnancy');
   const [pregWeek, setPregWeek] = useState(8);
 
@@ -166,6 +168,12 @@ export default function HomePage() {
               <button className="btn btn-primary btn-sm" onClick={() => navigate('/baby')}>添加宝宝</button>
             </div>
           )}
+
+          {/* Dynamic Advice */}
+          {(() => {
+            const advices = generateAdvice({ profile: profile!, feeds, sleeps, growths });
+            return <AdviceCard advice={advices} />;
+          })()}
 
           {/* Age-Specific Education */}
           {profile && (() => {

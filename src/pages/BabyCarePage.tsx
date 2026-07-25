@@ -4,6 +4,7 @@ import { Baby, Droplets, Moon, Activity, Plus, Clock, TrendingUp, Trash2, Play, 
 import { loadData, saveData, generateId } from '../data/store';
 import type { BabyProfile, FeedRecord, SleepRecord, DiaperRecord, GrowthRecord } from '../data/knowledge';
 import { feedingGuide, easyRoutines } from '../data/knowledge';
+import Checklist from '../components/Checklist';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function BabyCarePage() {
@@ -371,7 +372,23 @@ export default function BabyCarePage() {
           )}
         </div>
 
-        <div className="card">
+        <Checklist
+            listId="daily-care"
+            title="📋 每日照护清单"
+            icon=""
+            items={[
+              { text: '喂养记录(每天8-12次新生儿/3-4次大婴儿)' },
+              { text: '换尿布(每2-3小时，保持干爽)' },
+              { text: '抚触/按摩(10-15分钟)' },
+              { text: '俯卧时间/趴玩(每次2-5分钟，每天数次)' },
+              { text: '读绘本/互动游戏(10-15分钟)' },
+              { text: '维生素D 400IU' },
+              { text: '清洁口腔(纱布蘸温水擦拭牙龈)' },
+              { text: '洗澡/擦洗' },
+            ]}
+          />
+
+          <div className="card">
           <div className="card-header"><span className="card-title">📋 E.A.S.Y. 参考</span></div>
           {easyRoutines.map((r, i) => (
             <div key={i} style={{ fontSize: 13, padding: '6px 0', borderBottom: '1px solid var(--border)' }}>
