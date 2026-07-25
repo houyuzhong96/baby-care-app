@@ -5,6 +5,7 @@ import {
   pregnancyNutrients, pregnancyDietGuide, hospitalBagList, postpartumRecovery,
   feedingGuide, babySleepGuide, sleepTrainingMethods, easyRoutines,
 } from '../data/knowledge';
+import { dailyServings, weeklyMealPlan, trimesterMealTips, breastmilkStorage, newbornCareBasics, breastfeedingChecklist, engorgementCare, blockedDuctCare, mastitisSigns } from '../data/recipes';
 
 export default function KnowledgePage() {
   const [searchParams] = useSearchParams();
