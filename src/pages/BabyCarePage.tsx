@@ -33,7 +33,7 @@ export default function BabyCarePage() {
   const [timerStart, setTimerStart] = useState<number | null>(null);
   const [timerElapsed, setTimerElapsed] = useState(0);
   const [timerSide, setTimerSide] = useState<'left' | 'right'>('left');
-  
+
   // Sleep form
   const [sleepStart, setSleepStart] = useState(new Date().toISOString().slice(0, 16));
   const [sleepEnd, setSleepEnd] = useState(() => {
@@ -396,6 +396,7 @@ export default function BabyCarePage() {
 
   function FeedTab({ tab }: { tab: string }) {
     if (tab !== 'feed') return null;
+    return (
       <div>
         <button className="btn btn-primary btn-block" style={{ marginBottom: 12 }} onClick={() => navigate('/baby/record/feed')}>
           <Plus size={16} /> 记录喂养
