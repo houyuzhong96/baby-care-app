@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { ChevronDown, ChevronUp, Heart, Apple, Weight, Activity } from 'lucide-react';
+import { ChevronDown, ChevronUp, Heart, Apple } from 'lucide-react';
 import { pregnancyWeeks, pregnancyNutrients, pregnancyDietGuide, pregnancySymptoms, hospitalBagList } from '../data/knowledge';
 import { detailedSymptoms } from '../data/recipes';
 import { loadData, saveData } from '../data/store';
