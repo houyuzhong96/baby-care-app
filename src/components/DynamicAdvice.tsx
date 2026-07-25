@@ -14,6 +14,9 @@ export function generateAdvice({ profile, feeds, sleeps, growths }: Props): { ty
   const advice: { type: 'tip' | 'warning' | 'info'; title: string; text: string }[] = [];
   
   const birth = new Date(profile.birthDate);
+  if (isNaN(birth.getTime())) {
+    return [{ type: 'tip' as const, title: '完善宝宝信息', text: '请先设置宝宝的出生日期以获取个性化建议。' }];
+  }
   const ageDays = Math.floor((Date.now() - birth.getTime()) / 86400000);
   const ageMonths = Math.floor(ageDays / 30.44);
   
@@ -33,13 +36,19 @@ export function generateAdvice({ profile, feeds, sleeps, growths }: Props): { ty
   
   // E.A.S.Y. routine based on age
   const easyRoutine = easyRoutines.find(r => {
-    const [min, max] = r.age.split('-').map(s => {
-      const num = parseInt(s);
-      if (s.includes('周')) return num / 4.3;
-      if (s.includes('月')) return num;
-      return 0;
-    });
-    return ageMonths >= (min || 0) && ageMonths <= (max || 99);
+    try {
+      const parts = r.age.split('-');
+      const parseAge = (s: string) => {
+        const num = parseInt(s);
+        if (isNaN(num)) return 0;
+        if (s.includes('周')) return num / 4.3;
+        if (s.includes('月')) return num;
+        return num;
+      };
+      const min = parseAge(parts[0] || '0');
+      const max = parseAge(parts[1] || '99');
+      return ageMonths >= min && ageMonths <= max;
+    } catch { return false; }
   });
   if (easyRoutine) {
     advice.push({
@@ -51,13 +60,17 @@ export function generateAdvice({ profile, feeds, sleeps, growths }: Props): { ty
   
   // Sleep check
   const sleepGuide = babySleepGuide.find(s => {
-    const [min, max] = s.age.split('-').map(x => {
-      const num = parseInt(x);
-      if (x.includes('周')) return num / 4.3;
-      if (x.includes('月')) return num;
-      return 0;
-    });
-    return ageMonths >= (min || 0) && ageMonths <= (max || 99);
+    try {
+      const parts = s.age.split('-');
+      const parseAge = (x: string) => {
+        const num = parseInt(x);
+        if (isNaN(num)) return 0;
+        if (x.includes('周')) return num / 4.3;
+        if (x.includes('月')) return num;
+        return num;
+      };
+      return ageMonths >= parseAge(parts[0] || '0') && ageMonths <= parseAge(parts[1] || '99');
+    } catch { return false; }
   });
   
   if (sleepGuide) {

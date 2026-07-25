@@ -172,7 +172,7 @@ export default function HomePage() {
 
           {/* Dynamic Advice */}
           {(() => {
-            const advices = generateAdvice({ profile: profile!, feeds, sleeps, growths });
+            const advices = profile ? generateAdvice({ profile, feeds, sleeps, growths }) : [];
             return <AdviceCard advice={advices} />;
           })()}
 
