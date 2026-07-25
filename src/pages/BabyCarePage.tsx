@@ -33,8 +33,7 @@ export default function BabyCarePage() {
   const [timerStart, setTimerStart] = useState<number | null>(null);
   const [timerElapsed, setTimerElapsed] = useState(0);
   const [timerSide, setTimerSide] = useState<'left' | 'right'>('left');
-  const [showForm, setShowForm] = useState(false);
-
+  
   // Sleep form
   const [sleepStart, setSleepStart] = useState(new Date().toISOString().slice(0, 16));
   const [sleepEnd, setSleepEnd] = useState(() => {
@@ -80,7 +79,6 @@ export default function BabyCarePage() {
     const updated = [record, ...feeds];
     setFeeds(updated);
     saveData('feeds', updated);
-    setShowForm(false);
     navigate('/baby');
   };
 
@@ -89,7 +87,6 @@ export default function BabyCarePage() {
     const updated = [record, ...sleeps];
     setSleeps(updated);
     saveData('sleeps', updated);
-    setShowForm(false);
     navigate('/baby');
   };
 
@@ -98,7 +95,6 @@ export default function BabyCarePage() {
     const updated = [record, ...diapers];
     setDiapers(updated);
     saveData('diapers', updated);
-    setShowForm(false);
     navigate('/baby');
   };
 
@@ -113,7 +109,6 @@ export default function BabyCarePage() {
     const updated = [record, ...growths].sort((a, b) => a.date.localeCompare(b.date));
     setGrowths(updated);
     saveData('growths', updated);
-    setShowForm(false);
     navigate('/baby');
   };
 
