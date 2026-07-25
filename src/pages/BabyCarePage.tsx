@@ -396,11 +396,6 @@ export default function BabyCarePage() {
 
   function FeedTab({ tab }: { tab: string }) {
     if (tab !== 'feed') return null;
-    const last7 = [...Array(7)].map((_, i) => {
-      const d = new Date(); d.setDate(d.getDate() - i);
-      return d.toISOString().slice(0, 10);
-    }).reverse();
-    return (
       <div>
         <button className="btn btn-primary btn-block" style={{ marginBottom: 12 }} onClick={() => navigate('/baby/record/feed')}>
           <Plus size={16} /> 记录喂养
