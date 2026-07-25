@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Baby, Droplets, Moon, Activity, Plus, Clock, TrendingUp, CalendarDays, Heart } from 'lucide-react';
+import { Baby, Droplets, Moon, Activity, Clock, TrendingUp, CalendarDays, Heart, BookOpen, Stethoscope } from 'lucide-react';
 import IllusImage from '../components/IllusImage';
 import { loadData, saveData } from '../data/store';
 import type { BabyProfile, FeedRecord, SleepRecord, DiaperRecord } from '../data/knowledge';

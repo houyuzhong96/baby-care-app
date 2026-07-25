@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Baby, Droplets, Moon, Activity, Plus, X, Clock, TrendingUp, Trash2, Play, Pause } from 'lucide-react';
+import { Baby, Droplets, Moon, Activity, Plus, Clock, TrendingUp, Trash2, Play, Pause } from 'lucide-react';
 import { loadData, saveData, generateId } from '../data/store';
 import type { BabyProfile, FeedRecord, SleepRecord, DiaperRecord, GrowthRecord } from '../data/knowledge';
 import { feedingGuide, easyRoutines } from '../data/knowledge';
@@ -52,8 +52,7 @@ export default function BabyCarePage() {
   const [growthHeight, setGrowthHeight] = useState('');
   const [growthHead, setGrowthHead] = useState('');
 
-  const [showForm, setShowForm] = useState(false);
-
+  
   useEffect(() => {
     if (type) setTab(type);
     const interval = setInterval(() => {
