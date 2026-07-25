@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Baby, Droplets, Moon, Activity, Clock, TrendingUp, CalendarDays, Heart, BookOpen, Stethoscope } from 'lucide-react';
 import IllusImage from '../components/IllusImage';
 import { generateAdvice, AdviceCard } from '../components/DynamicAdvice';
+import DailyPlan from '../components/DailyPlan';
 import { loadData, saveData } from '../data/store';
 import type { BabyProfile, FeedRecord, SleepRecord, DiaperRecord, GrowthRecord } from '../data/knowledge';
 import { pregnancyWeeks, getAgeEducation } from '../data/knowledge';
@@ -13,7 +14,7 @@ export default function HomePage() {
   const [feeds, setFeeds] = useState<FeedRecord[]>([]);
   const [sleeps, setSleeps] = useState<SleepRecord[]>([]);
   const [diapers, setDiapers] = useState<DiaperRecord[]>([]);
-  const [growths, _setGrowths] = useState<GrowthRecord[]>(() => loadData<GrowthRecord[]>("growths", []));
+  const growths = loadData<GrowthRecord[]>('growths', []);
   const [mode, setMode] = useState<'pregnancy' | 'baby'>('pregnancy');
   const [pregWeek, setPregWeek] = useState(8);
 
@@ -173,6 +174,13 @@ export default function HomePage() {
           {(() => {
             const advices = generateAdvice({ profile: profile!, feeds, sleeps, growths });
             return <AdviceCard advice={advices} />;
+          })()}
+
+          {/* Daily Plan */}
+          {profile && (() => {
+            const birth = new Date(profile.birthDate);
+            const ageMonths = Math.floor((Date.now() - birth.getTime()) / (30.44 * 86400000));
+            return <DailyPlan babyAgeMonths={ageMonths} apiKey={loadData<string>('deepseek_key', '')} />;
           })()}
 
           {/* Age-Specific Education */}

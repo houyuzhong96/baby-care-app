@@ -37,7 +37,7 @@ export default function KnowledgeChat({ onClose }: Props) {
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [apiKey, setApiKey] = useState(() => loadData<string>('openai_key', ''));
+  const [apiKey, setApiKey] = useState(() => loadData<string>('deepseek_key', ''));
   const [showKeyInput, setShowKeyInput] = useState(false);
   const msgEnd = useRef<HTMLDivElement>(null);
 
@@ -49,7 +49,7 @@ export default function KnowledgeChat({ onClose }: Props) {
     if (!apiKey) {
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        text: '请先设置 OpenAI API Key。点击右上角钥匙图标，输入你的 API Key（在 https://platform.openai.com/api-keys 获取）。' 
+        text: '请先设置 OpenAI API Key。点击右上角钥匙图标，输入你的 API Key（在 https://platform.deepseek.com/api_keys 获取）。' 
       }]);
       return;
     }
@@ -61,14 +61,14 @@ export default function KnowledgeChat({ onClose }: Props) {
     ];
 
     try {
-      const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      const res = await fetch('https://api.deepseek.com/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: 'gpt-4o-mini',
+          model: 'deepseek-chat',
           messages: chatMessages,
           max_tokens: 800,
           temperature: 0.7,
@@ -110,7 +110,7 @@ export default function KnowledgeChat({ onClose }: Props) {
 
   const saveKey = (key: string) => {
     setApiKey(key);
-    saveData('openai_key', key);
+    saveData('deepseek_key', key);
     setShowKeyInput(false);
   };
 
