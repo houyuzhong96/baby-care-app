@@ -4,7 +4,7 @@ import { Baby, Droplets, Moon, Activity, Clock, TrendingUp, CalendarDays, Heart,
 import IllusImage from '../components/IllusImage';
 import { loadData, saveData } from '../data/store';
 import type { BabyProfile, FeedRecord, SleepRecord, DiaperRecord } from '../data/knowledge';
-import { pregnancyWeeks } from '../data/knowledge';
+import { pregnancyWeeks, getAgeEducation } from '../data/knowledge';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -92,7 +92,13 @@ export default function HomePage() {
                 <div className="stat-label">宝宝体重</div>
               </div>
             </div>
-            <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 12 }}>{currentWeek.tips}</p>
+            <div style={{ marginTop: 12, fontSize: 13 }}>
+            <p style={{ marginBottom: 4 }}><strong>🧬 宝宝：</strong>{currentWeek.development}</p>
+            <p style={{ marginBottom: 4 }}><strong>🤰 妈妈：</strong>{currentWeek.motherChanges}</p>
+            <p style={{ marginBottom: 4 }}><strong>💡 建议：</strong>{currentWeek.tips}</p>
+            {currentWeek.nutrition && <p style={{ marginBottom: 4 }}><strong>🥗 营养：</strong>{currentWeek.nutrition}</p>}
+            {currentWeek.warning && <p style={{ color: 'var(--danger)', fontSize: 12 }}>⚠️ {currentWeek.warning}</p>}
+          </div>
           </div>
 
           <div className="card">
@@ -160,6 +166,42 @@ export default function HomePage() {
               <button className="btn btn-primary btn-sm" onClick={() => navigate('/baby')}>添加宝宝</button>
             </div>
           )}
+
+          {/* Age-Specific Education */}
+          {profile && (() => {
+            const birth = new Date(profile.birthDate);
+            const ageMonths = Math.floor((Date.now() - birth.getTime()) / (30.44 * 86400000));
+            const edu = getAgeEducation(ageMonths);
+            if (!edu) return null;
+            return (
+              <div className="card">
+                <div className="card-header">
+                  <span className="card-title">🎯 {edu.ageLabel}成长建议</span>
+                  <span className="chip chip-info">月龄{ageMonths}月</span>
+                </div>
+                <div style={{ fontSize: 13, lineHeight: 1.6 }}>
+                  <div style={{ marginBottom: 8 }}>
+                    <strong style={{ color: 'var(--success)' }}>✅ 发育里程碑：</strong>
+                    {edu.milestones.map((m, i) => <span key={i} className="chip chip-success" style={{ margin: 2 }}>{m}</span>)}
+                  </div>
+                  <div style={{ marginBottom: 8 }}>
+                    <strong style={{ color: 'var(--primary)' }}>🎮 适合的游戏：</strong>
+                    {edu.activities.slice(0, 3).map((a, i) => <p key={i} style={{ padding: '2px 0' }}>• {a}</p>)}
+                  </div>
+                  <div style={{ marginBottom: 8 }}>
+                    <strong style={{ color: '#7c3aed' }}>📝 养育要点：</strong>
+                    {edu.parentingTips.slice(0, 3).map((t, i) => <p key={i} style={{ padding: '2px 0' }}>• {t}</p>)}
+                  </div>
+                  {edu.warningFlags.length > 0 && (
+                    <div>
+                      <strong style={{ color: 'var(--danger)' }}>⚠️ 需关注：</strong>
+                      {edu.warningFlags.slice(0, 2).map((w, i) => <p key={i} style={{ padding: '2px 0', fontSize: 11 }}>• {w}</p>)}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })()}
 
           <div className="section-title">快速记录</div>
           <div className="record-grid">

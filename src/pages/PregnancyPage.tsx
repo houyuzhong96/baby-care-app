@@ -34,12 +34,16 @@ export default function PregnancyPage() {
         <div className="stats-row">
           <div className="stat-item"><div className="stat-value" style={{ fontSize: 16 }}>{currentWeek.babySize}</div><div className="stat-label">宝宝大小</div></div>
           <div className="stat-item"><div className="stat-value" style={{ fontSize: 16 }}>{currentWeek.babyWeight}</div><div className="stat-label">宝宝体重</div></div>
+          <div className="stat-item"><div className="stat-value" style={{ fontSize: 12 }}>{currentWeek.babyLength}</div><div className="stat-label">宝宝身长</div></div>
           <div className="stat-item"><div className="stat-value" style={{ fontSize: 12 }}>第{currentWeek.trimester === 1 ? '一' : currentWeek.trimester === 2 ? '二' : '三'}孕期</div><div className="stat-label">阶段</div></div>
         </div>
         <div style={{ marginTop: 12, fontSize: 13 }}>
-          <p style={{ marginBottom: 4 }}><strong>宝宝发育：</strong>{currentWeek.development}</p>
-          <p style={{ marginBottom: 4 }}><strong>妈妈变化：</strong>{currentWeek.motherChanges}</p>
-          <p><strong>本周要点：</strong>{currentWeek.tips}</p>
+          <p style={{ marginBottom: 6 }}><strong>🧬 宝宝发育：</strong>{currentWeek.development}</p>
+          <p style={{ marginBottom: 6 }}><strong>🤰 妈妈变化：</strong>{currentWeek.motherChanges}</p>
+          <p style={{ marginBottom: 6 }}><strong>💡 本周建议：</strong>{currentWeek.tips}</p>
+          {currentWeek.nutrition && <p style={{ marginBottom: 6 }}><strong>🥗 营养重点：</strong>{currentWeek.nutrition}</p>}
+          {currentWeek.checkup && <p style={{ marginBottom: 6 }}><strong>🏥 检查提醒：</strong>{currentWeek.checkup}</p>}
+          {currentWeek.warning && <p style={{ marginBottom: 0, color: 'var(--danger)', fontSize: 12 }}><strong>⚠️ 注意：</strong>{currentWeek.warning}</p>}
         </div>
       </div>
 
