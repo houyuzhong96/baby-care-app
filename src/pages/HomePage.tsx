@@ -191,7 +191,7 @@ export default function HomePage() {
               ) : (
                 <div className="timeline">
                   {[...todayFeeds, ...todaySleep.map(s => ({ ...s, __type: 'sleep' })), ...todayDiapers.map(d => ({ ...d, __type: 'diaper' }))]
-                    .sort((a, b) => new Date(b.time || (b as any).startTime || '').getTime() - new Date(a.time || (a as any).startTime || '').getTime())
+                    .sort((a: any, b: any) => new Date(b.time || b.startTime || '').getTime() - new Date(a.time || a.startTime || '').getTime())
                     .slice(0, 10)
                     .map((item: any, i) => (
                       <div className="timeline-item" key={i}>

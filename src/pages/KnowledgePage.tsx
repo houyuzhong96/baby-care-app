@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Heart, ChevronDown, ChevronUp } from 'lucide-react';
+import { Heart, ChevronDown, ChevronUp, UtensilsCrossed, Home } from 'lucide-react';
 import {
   pregnancyNutrients, pregnancyDietGuide, hospitalBagList, postpartumRecovery,
   feedingGuide, babySleepGuide, sleepTrainingMethods, easyRoutines,
