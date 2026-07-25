@@ -13,7 +13,7 @@ export default function HomePage() {
   const [feeds, setFeeds] = useState<FeedRecord[]>([]);
   const [sleeps, setSleeps] = useState<SleepRecord[]>([]);
   const [diapers, setDiapers] = useState<DiaperRecord[]>([]);
-  const [growths] = useState<GrowthRecord[]>(() => loadData<GrowthRecord[]>('growths', []));
+  const [growths, _setGrowths] = useState<GrowthRecord[]>(() => loadData<GrowthRecord[]>("growths", []));
   const [mode, setMode] = useState<'pregnancy' | 'baby'>('pregnancy');
   const [pregWeek, setPregWeek] = useState(8);
 
@@ -24,7 +24,7 @@ export default function HomePage() {
     setMode(m === 'pregnancy' ? 'pregnancy' : p ? 'baby' : 'pregnancy');
     setFeeds(loadData<FeedRecord[]>('feeds', []));
     setSleeps(loadData<SleepRecord[]>('sleeps', []));
-    setDiapers(loadData<DiaperRecord[]>('diapers', []));
+    setDiapers(loadData<DiaperRecord[]>("diapers", []));
     setPregWeek(loadData<number>('preg_week', 8));
   }, []);
 
