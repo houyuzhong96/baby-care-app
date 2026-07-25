@@ -33,7 +33,7 @@ export default function BabyCarePage() {
   const [timerStart, setTimerStart] = useState<number | null>(null);
   const [timerElapsed, setTimerElapsed] = useState(0);
   const [timerSide, setTimerSide] = useState<'left' | 'right'>('left');
-  const [showForm] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   // Sleep form
   const [sleepStart, setSleepStart] = useState(new Date().toISOString().slice(0, 16));
