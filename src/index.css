@@ -576,3 +576,6 @@ a, button { transition: color 0.15s ease, background 0.15s ease, opacity 0.15s e
 
 /* Tab content - reuse existing keyframes */
 .tab-content { animation: tabFadeIn 0.25s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+
+/* Nav item with query params - both visible */
+.nav-item:has(+ .nav-item) { /* keep original spacing */ }

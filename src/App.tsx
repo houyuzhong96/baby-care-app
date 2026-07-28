@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { Home, BookOpen, Sprout, PenLine, RefreshCw } from 'lucide-react';
+import { Home, BookOpen, Sprout, PenLine, RefreshCw, ChefHat } from 'lucide-react';
 import { Component, type ReactNode } from 'react';
 import HomePage from './pages/HomePage';
 import BabyCarePage from './pages/BabyCarePage';
@@ -32,7 +32,7 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | 
 const pregnancyNav = [
   { path: '/', icon: Home, label: '首页' },
   { path: '/grow', icon: Sprout, label: '周历' },
-  { path: '/learn?tab=recipes', icon: BookOpen, label: '食谱' },
+  { path: '/learn?tab=recipes', icon: ChefHat, label: '食谱' },
   { path: '/learn', icon: BookOpen, label: '知识' },
 ];
 const babyNav = [
@@ -138,7 +138,11 @@ export default function App() {
       {showNav && (
         <nav className="bottom-nav">
           {(appMode === 'pregnancy' ? pregnancyNav : babyNav).map((item: any) => {
-            const isActive = item.path === '/' ? location.pathname === '/' : location.pathname.startsWith(item.path);
+            const isActive = (() => {
+            if (item.path === '/') return location.pathname === '/';
+            const navPath = item.path.split('?')[0];
+            return location.pathname.startsWith(navPath);
+          })();
             return (
               <button key={item.path} className={'nav-item' + (isActive ? ' active' : '')} onClick={() => navigate(item.path)}>
                 <item.icon size={20} />

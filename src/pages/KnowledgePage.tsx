@@ -13,6 +13,7 @@ export default function KnowledgePage() {
   const [searchParams] = useSearchParams();
   const initialTab = searchParams.get('tab') || 'diet';
   const [tab, setTab] = useState(initialTab);
+  useEffect(() => setTab(searchParams.get('tab') || ((localStorage.getItem('app_mode')||'pregnancy')==='pregnancy'?'diet':'babycare')), [searchParams]);
   useEffect(() => { const handler = () => { const m = localStorage.getItem('app_mode') || 'pregnancy'; /* mode listener */ setTab(m === 'pregnancy' ? 'diet' : 'babycare'); }; window.addEventListener('modeChange', handler); return () => window.removeEventListener('modeChange', handler); }, []);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [showChat, setShowChat] = useState(false);
