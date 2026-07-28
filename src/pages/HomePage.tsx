@@ -95,16 +95,16 @@ export default function HomePage() {
 
           {/* Quick links */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 10 }}>
-            <button className="btn btn-secondary" onClick={() => navigate('/learn')} style={{ fontSize: 12, justifyContent: 'flex-start', gap: 6 }}>
+            <button className="btn btn-secondary" onClick={() => navigate('/learn?tab=recipes')} style={{ fontSize: 12, justifyContent: 'flex-start', gap: 6 }}>
               孕期食谱
             </button>
-            <button className="btn btn-secondary" onClick={() => navigate('/learn')} style={{ fontSize: 12, justifyContent: 'flex-start', gap: 6 }}>
+            <button className="btn btn-secondary" onClick={() => navigate('/learn?tab=bag')} style={{ fontSize: 12, justifyContent: 'flex-start', gap: 6 }}>
               待产清单
             </button>
             <button className="btn btn-secondary" onClick={() => navigate('/health')} style={{ fontSize: 12, justifyContent: 'flex-start', gap: 6 }}>
               症状查询
             </button>
-            <button className="btn btn-secondary" onClick={() => navigate('/learn')} style={{ fontSize: 12, justifyContent: 'flex-start', gap: 6 }}>
+            <button className="btn btn-secondary" onClick={() => navigate('/learn?tab=postpartum')} style={{ fontSize: 12, justifyContent: 'flex-start', gap: 6 }}>
               产后恢复
             </button>
           </div>

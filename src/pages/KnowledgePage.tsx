@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Heart, ChevronDown, ChevronUp, UtensilsCrossed, MessageCircle, ChefHat } from 'lucide-react';
 import {
   pregnancyNutrients, pregnancyDietGuide, hospitalBagList, postpartumRecovery,
-  feedingGuide, babySleepGuide, sleepTrainingMethods, easyRoutines,
+  feedingGuide, babySleepGuide, sleepTrainingMethods, easyRoutines, babyCareGuide, babyCareByMonth,
 } from '../data/knowledge';
 import { dailyServings, weeklyMealPlan, trimesterMealTips, breastmilkStorage, newbornCareBasics, breastfeedingChecklist, engorgementCare, blockedDuctCare, mastitisSigns, chineseRecipes, chineseWeeklyMealPlan } from '../data/recipes';
 import Checklist from '../components/Checklist';
@@ -344,6 +344,62 @@ export default function KnowledgePage() {
               </div>
             );
           })}
+        </div>
+      )}
+
+      
+      {tab === 'babycare' && (
+        <div>
+          <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 12 }}>
+            综合梅奥育儿全书、崔玉涛、实用程序育儿法等权威书籍的宝宝护理指南
+          </div>
+          
+          {/* Monthly care tips */}
+          {Object.entries(babyCareByMonth).map(([month, topics]) => (
+            <div className="card" key={month}>
+              <div className="accordion">
+                <div className="accordion-header" onClick={() => toggle('month-' + month)} style={{ borderBottom: 'none' }}>
+                  <span style={{ fontWeight: 600 }}>🗓️ {month}护理要点</span>
+                  {expanded === 'month-' + month ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                </div>
+                {expanded === 'month-' + month && (
+                  <div className="accordion-body">
+                    {topics.map((t, i) => (
+                      <div key={i} style={{ marginBottom: 10 }}>
+                        <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 4 }}>{t.title}</div>
+                        {t.tips.map((tip, j) => (
+                          <p key={j} style={{ padding: '2px 0', fontSize: 12 }}>• {tip}</p>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+
+          {/* Detailed care topics */}
+          <div className="section-title">详细护理指南</div>
+          {babyCareGuide.map((topic, i) => (
+            <div className="card" key={i}>
+              <div className="accordion">
+                <div className="accordion-header" onClick={() => toggle('care-' + i)} style={{ borderBottom: 'none' }}>
+                  <span><span style={{ marginRight: 6 }}>{topic.icon}</span><span style={{ fontWeight: 600 }}>{topic.title}</span></span>
+                  {expanded === 'care-' + i ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                </div>
+                {expanded === 'care-' + i && (
+                  <div className="accordion-body">
+                    {topic.content.map((c, j) => (
+                      <div key={j} style={{ marginBottom: 10 }}>
+                        <div style={{ fontWeight: 600, fontSize: 12, marginBottom: 2, color: 'var(--primary)' }}>{c.subtitle}</div>
+                        <p style={{ fontSize: 12, lineHeight: 1.6 }}>{c.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       )}
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, Heart, Apple } from 'lucide-react';
-import { pregnancyWeeks, pregnancyNutrients, pregnancyDietGuide, pregnancySymptoms, hospitalBagList } from '../data/knowledge';
+import { pregnancyWeeks, pregnancyNutrients, pregnancyDietGuide, pregnancySymptoms } from '../data/knowledge';
 import { detailedSymptoms } from '../data/recipes';
 import { loadData, saveData } from '../data/store';
 
@@ -153,45 +153,6 @@ export default function PregnancyPage() {
             )}
           </div>
         ))}
-      </div>
-
-      {/* Hospital Bag */}
-      <div className="section-title">待产准备</div>
-      <div className="card">
-        <div className="accordion">
-          <div className="accordion-header" onClick={() => toggle('bag-mother')}>
-            <span>👩 妈妈用品 ({hospitalBagList.mother.length}项)</span>
-            {expanded === 'bag-mother' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-          </div>
-          {expanded === 'bag-mother' && (
-            <div className="accordion-body">
-              {hospitalBagList.mother.map((item, i) => <div key={i} style={{ padding: '4px 0' }}>☐ {item}</div>)}
-            </div>
-          )}
-        </div>
-        <div className="accordion">
-          <div className="accordion-header" onClick={() => toggle('bag-baby')}>
-            <span>👶 宝宝用品 ({hospitalBagList.baby.length}项)</span>
-            {expanded === 'bag-baby' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-          </div>
-          {expanded === 'bag-baby' && (
-            <div className="accordion-body">
-              {hospitalBagList.baby.map((item, i) => <div key={i} style={{ padding: '4px 0' }}>☐ {item}</div>)}
-            </div>
-          )}
-        </div>
-        <div className="accordion">
-          <div className="accordion-header" onClick={() => toggle('bag-other')}>
-            <span>📋 其他 ({hospitalBagList.others.length}项)</span>
-            {expanded === 'bag-other' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-          </div>
-          {expanded === 'bag-other' && (
-            <div className="accordion-body">
-              {hospitalBagList.others.map((item, i) => <div key={i} style={{ padding: '4px 0' }}>☐ {item}</div>)}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+      </div></div>
   );
 }
