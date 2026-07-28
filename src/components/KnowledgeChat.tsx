@@ -116,13 +116,13 @@ export default function KnowledgeChat({ onClose }: Props) {
 
   return (
     <div style={{ position: 'fixed', inset: 0, background: '#fff', zIndex: 300, display: 'flex', flexDirection: 'column', maxWidth: 480, margin: '0 auto' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', borderBottom: '1px solid var(--border)', background: 'var(--primary)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', borderBottom: '1px solid var(--border)', background: 'var(--text)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Sparkles size={20} color="#fff" />
           <span style={{ color: '#fff', fontWeight: 600, fontSize: 16 }}>育儿知识问答</span>
         </div>
         <div style={{ display: 'flex', gap: 8 }}>
-          <button onClick={() => setShowKeyInput(!showKeyInput)} style={{ background: 'rgba(255,255,255,0.2)', border: 'none', color: '#fff', cursor: 'pointer', borderRadius: 8, padding: '4px 8px' }}>
+          <button onClick={() => setShowKeyInput(!showKeyInput)} style={{ background: 'rgba(255,255,254,0.15)', border: 'none', color: '#fff', cursor: 'pointer', borderRadius: 8, padding: '4px 8px' }}>
             <Key size={18} />
           </button>
           <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }}>

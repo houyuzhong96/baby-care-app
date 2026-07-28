@@ -73,7 +73,7 @@ export default function HomePage() {
           {/* Pregnancy Dashboard */}
           <div className="card">
             <div className="card-header">
-              <span className="card-title"><Heart size={20} color="#ff3b30" /> 孕期进度</span>
+              <span className="card-title"><Heart size={20} color="var(--danger)" /> 孕期进度</span>
               <span className="chip chip-info">孕{pregWeek}周 - 第{currentWeek.trimester === 1 ? '一' : currentWeek.trimester === 2 ? '二' : '三'}孕期</span>
             </div>
             <div className="week-selector">
@@ -106,7 +106,7 @@ export default function HomePage() {
 
           <div className="card">
             <div className="card-header">
-              <span className="card-title"><Activity size={20} color="#4a90d9" /> 本周变化</span>
+              <span className="card-title"><Activity size={20} color="var(--accent)" /> 本周变化</span>
             </div>
             <div style={{ marginTop: 8 }}>
               <div style={{ fontSize: 13, marginBottom: 8 }}><strong style={{ color: 'var(--primary)' }}>宝宝发育：</strong>{currentWeek.development}</div>
@@ -117,19 +117,19 @@ export default function HomePage() {
           <div className="section-title">孕期工具</div>
           <div className="record-grid">
             <div className="record-card" onClick={() => navigate('/knowledge?tab=diet')}>
-              <div className="icon-wrap" style={{ background: '#34c759' }}><BookOpen size={22} /></div>
+              <div className="icon-wrap" style={{ background: 'var(--success)' }}><BookOpen size={22} /></div>
               <span className="label">饮食指南</span>
             </div>
             <div className="record-card" onClick={() => navigate('/health')}>
-              <div className="icon-wrap" style={{ background: '#ff9500' }}><Stethoscope size={22} /></div>
+              <div className="icon-wrap" style={{ background: 'var(--warning)' }}><Stethoscope size={22} /></div>
               <span className="label">症状查询</span>
             </div>
             <div className="record-card" onClick={() => navigate('/knowledge?tab=bag')}>
-              <div className="icon-wrap" style={{ background: '#5856d6' }}><CalendarDays size={22} /></div>
+              <div className="icon-wrap" style={{ background: 'var(--primary)' }}><CalendarDays size={22} /></div>
               <span className="label">待产清单</span>
             </div>
             <div className="record-card" onClick={() => navigate('/knowledge?tab=postpartum')}>
-              <div className="icon-wrap" style={{ background: '#ff2d55' }}><Heart size={22} /></div>
+              <div className="icon-wrap" style={{ background: 'var(--danger)' }}><Heart size={22} /></div>
               <span className="label">产后恢复</span>
             </div>
           </div>
@@ -143,7 +143,7 @@ export default function HomePage() {
           {profile ? (
             <div className="card">
               <div className="card-header">
-                <span className="card-title"><Baby size={20} color="#4a90d9" /> {profile.name || '宝宝'}</span>
+                <span className="card-title"><Baby size={20} color="var(--accent)" /> {profile.name || '宝宝'}</span>
                 <span className="age-pill">{getBabyAge()}</span>
               </div>
               <div className="stats-row">
@@ -222,19 +222,19 @@ export default function HomePage() {
           <div className="section-title">快速记录</div>
           <div className="record-grid">
             <div className="record-card" onClick={() => navigate('/baby/record/feed')}>
-              <div className="icon-wrap" style={{ background: '#4a90d9' }}><Droplets size={22} /></div>
+              <div className="icon-wrap" style={{ background: 'var(--accent)' }}><Droplets size={22} /></div>
               <span className="label">喂养</span>
             </div>
             <div className="record-card" onClick={() => navigate('/baby/record/sleep')}>
-              <div className="icon-wrap" style={{ background: '#5856d6' }}><Moon size={22} /></div>
+              <div className="icon-wrap" style={{ background: 'var(--primary)' }}><Moon size={22} /></div>
               <span className="label">睡眠</span>
             </div>
             <div className="record-card" onClick={() => navigate('/baby/record/diaper')}>
-              <div className="icon-wrap" style={{ background: '#34c759' }}><Activity size={22} /></div>
+              <div className="icon-wrap" style={{ background: 'var(--success)' }}><Activity size={22} /></div>
               <span className="label">尿布</span>
             </div>
             <div className="record-card" onClick={() => navigate('/baby/record/growth')}>
-              <div className="icon-wrap" style={{ background: '#ff9500' }}><TrendingUp size={22} /></div>
+              <div className="icon-wrap" style={{ background: 'var(--warning)' }}><TrendingUp size={22} /></div>
               <span className="label">生长</span>
             </div>
           </div>
@@ -242,7 +242,7 @@ export default function HomePage() {
           {profile && (
             <div className="card">
               <div className="card-header">
-                <span className="card-title"><Clock size={20} color="#34c759" /> 今日记录</span>
+                <span className="card-title"><Clock size={20} color="var(--success)" /> 今日记录</span>
               </div>
               {todayFeeds.length === 0 && todaySleep.length === 0 && todayDiapers.length === 0 ? (
                 <div className="empty-state"><IllusImage name="emptyRecords" size={100} fallback="📝" /><p style={{ marginTop: 8 }}>今天还没有记录</p></div>

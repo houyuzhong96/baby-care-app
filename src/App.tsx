@@ -145,7 +145,7 @@ function DataSync() {
             {syncUrl ? (
               <div style={{ marginBottom: 16 }}>
                 <div style={{ fontSize: 13, color: 'var(--success)', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 4 }}>
-                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#34c759', display: 'inline-block' }} /> 已连接
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--success)', display: 'inline-block' }} /> 已连接
                 </div>
                 <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginBottom: 4 }}>
                   上次同步：{lastSync || '刚刚'}
