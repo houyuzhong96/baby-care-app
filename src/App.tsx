@@ -29,10 +29,16 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | 
 }
 
 /* ======== 4-Tab Navigation ======== */
-const navItems = [
+const pregnancyNav = [
+  { path: '/', icon: Home, label: '首页' },
+  { path: '/grow', icon: Sprout, label: '周历' },
+  { path: '/learn?tab=recipes', icon: BookOpen, label: '食谱' },
+  { path: '/learn', icon: BookOpen, label: '知识' },
+];
+const babyNav = [
   { path: '/', icon: Home, label: '首页' },
   { path: '/track', icon: PenLine, label: '记录' },
-  { path: '/grow', icon: Sprout, label: '成长' },
+  { path: '/development', icon: Sprout, label: '成长' },
   { path: '/learn', icon: BookOpen, label: '知识' },
 ];
 
@@ -97,6 +103,14 @@ export default function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const [showNav, setShowNav] = useState(true);
+  const [appMode, setAppMode] = useState<'pregnancy'|'baby'>(() => (localStorage.getItem('app_mode') as any) || 'pregnancy');
+
+  // Listen for mode changes from HomePage
+  useEffect(() => {
+    const handler = () => setAppMode((localStorage.getItem('app_mode') as any) || 'pregnancy');
+    window.addEventListener('modeChange', handler);
+    return () => window.removeEventListener('modeChange', handler);
+  }, []);
 
   useEffect(() => {
     if (location.pathname.match(/^\/track\/record/)) setShowNav(false);
@@ -123,7 +137,7 @@ export default function App() {
       <DataSync />
       {showNav && (
         <nav className="bottom-nav">
-          {navItems.map(item => {
+          {(appMode === 'pregnancy' ? pregnancyNav : babyNav).map((item: any) => {
             const isActive = item.path === '/' ? location.pathname === '/' : location.pathname.startsWith(item.path);
             return (
               <button key={item.path} className={'nav-item' + (isActive ? ' active' : '')} onClick={() => navigate(item.path)}>
