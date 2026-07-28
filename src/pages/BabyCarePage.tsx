@@ -80,7 +80,7 @@ export default function BabyCarePage() {
     const updated = [record, ...feeds];
     setFeeds(updated);
     saveData('feeds', updated);
-    navigate('/baby');
+    navigate('/track');
   };
 
   const addSleep = () => {
@@ -88,7 +88,7 @@ export default function BabyCarePage() {
     const updated = [record, ...sleeps];
     setSleeps(updated);
     saveData('sleeps', updated);
-    navigate('/baby');
+    navigate('/track');
   };
 
   const addDiaper = () => {
@@ -96,7 +96,7 @@ export default function BabyCarePage() {
     const updated = [record, ...diapers];
     setDiapers(updated);
     saveData('diapers', updated);
-    navigate('/baby');
+    navigate('/track');
   };
 
   const addGrowth = () => {
@@ -110,7 +110,7 @@ export default function BabyCarePage() {
     const updated = [record, ...growths].sort((a, b) => a.date.localeCompare(b.date));
     setGrowths(updated);
     saveData('growths', updated);
-    navigate('/baby');
+    navigate('/track');
   };
 
   const deleteRecord = (type: string, id: string) => {
@@ -202,7 +202,7 @@ export default function BabyCarePage() {
           <div className="card">
             <div className="card-header">
               <span className="card-title"><Droplets size={20} color="#4a90d9" /> 记录喂养</span>
-              <button className="btn btn-sm btn-secondary" onClick={() => navigate('/baby')}>← 返回</button>
+              <button className="btn btn-sm btn-secondary" onClick={() => navigate('/track')}>← 返回</button>
             </div>
             {/* Feed Timer */}
             <div className="timer-display" style={{ background: '#f0f5ff', borderRadius: 12, margin: '12px 0' }}>
@@ -259,7 +259,7 @@ export default function BabyCarePage() {
           <div className="card">
             <div className="card-header">
               <span className="card-title"><Moon size={20} color="#5856d6" /> 记录睡眠</span>
-              <button className="btn btn-sm btn-secondary" onClick={() => navigate('/baby')}>← 返回</button>
+              <button className="btn btn-sm btn-secondary" onClick={() => navigate('/track')}>← 返回</button>
             </div>
             <div className="form-group">
               <label className="form-label">入睡时间</label>
@@ -287,7 +287,7 @@ export default function BabyCarePage() {
           <div className="card">
             <div className="card-header">
               <span className="card-title"><Activity size={20} color="#34c759" /> 记录尿布</span>
-              <button className="btn btn-sm btn-secondary" onClick={() => navigate('/baby')}>← 返回</button>
+              <button className="btn btn-sm btn-secondary" onClick={() => navigate('/track')}>← 返回</button>
             </div>
             <div className="form-group">
               <label className="form-label">类型</label>
@@ -311,7 +311,7 @@ export default function BabyCarePage() {
           <div className="card">
             <div className="card-header">
               <span className="card-title"><TrendingUp size={20} color="#ff9500" /> 记录生长</span>
-              <button className="btn btn-sm btn-secondary" onClick={() => navigate('/baby')}>← 返回</button>
+              <button className="btn btn-sm btn-secondary" onClick={() => navigate('/track')}>← 返回</button>
             </div>
             <div className="form-group">
               <label className="form-label">日期</label>
@@ -341,19 +341,19 @@ export default function BabyCarePage() {
     return (
       <>
         <div className="record-grid">
-          <div className="record-card" onClick={() => navigate('/baby/record/feed')}>
+          <div className="record-card" onClick={() => navigate('/track/record/feed')}>
             <div className="icon-wrap" style={{ background: '#4a90d9' }}><Droplets size={22} /></div>
             <span className="label">记录喂养</span>
           </div>
-          <div className="record-card" onClick={() => navigate('/baby/record/sleep')}>
+          <div className="record-card" onClick={() => navigate('/track/record/sleep')}>
             <div className="icon-wrap" style={{ background: '#5856d6' }}><Moon size={22} /></div>
             <span className="label">记录睡眠</span>
           </div>
-          <div className="record-card" onClick={() => navigate('/baby/record/diaper')}>
+          <div className="record-card" onClick={() => navigate('/track/record/diaper')}>
             <div className="icon-wrap" style={{ background: '#34c759' }}><Activity size={22} /></div>
             <span className="label">记录尿布</span>
           </div>
-          <div className="record-card" onClick={() => navigate('/baby/record/growth')}>
+          <div className="record-card" onClick={() => navigate('/track/record/growth')}>
             <div className="icon-wrap" style={{ background: '#ff9500' }}><TrendingUp size={22} /></div>
             <span className="label">记录生长</span>
           </div>
@@ -415,7 +415,7 @@ export default function BabyCarePage() {
     if (tab !== 'feed') return null;
     return (
       <div>
-        <button className="btn btn-primary btn-block" style={{ marginBottom: 12 }} onClick={() => navigate('/baby/record/feed')}>
+        <button className="btn btn-primary btn-block" style={{ marginBottom: 12 }} onClick={() => navigate('/track/record/feed')}>
           <Plus size={16} /> 记录喂养
         </button>
         {feeds.slice(0, 30).map(f => (
@@ -446,7 +446,7 @@ export default function BabyCarePage() {
     if (tab !== 'sleep') return null;
     return (
       <div>
-        <button className="btn btn-primary btn-block" style={{ marginBottom: 12 }} onClick={() => navigate('/baby/record/sleep')}>
+        <button className="btn btn-primary btn-block" style={{ marginBottom: 12 }} onClick={() => navigate('/track/record/sleep')}>
           <Plus size={16} /> 记录睡眠
         </button>
         {sleeps.slice(0, 30).map(s => {
@@ -481,7 +481,7 @@ export default function BabyCarePage() {
     if (tab !== 'diaper') return null;
     return (
       <div>
-        <button className="btn btn-primary btn-block" style={{ marginBottom: 12 }} onClick={() => navigate('/baby/record/diaper')}>
+        <button className="btn btn-primary btn-block" style={{ marginBottom: 12 }} onClick={() => navigate('/track/record/diaper')}>
           <Plus size={16} /> 记录尿布
         </button>
         {diapers.slice(0, 30).map(d => (
@@ -511,7 +511,7 @@ export default function BabyCarePage() {
     const chartData = growths.map(g => ({ date: g.date, weight: g.weight, height: g.height }));
     return (
       <div>
-        <button className="btn btn-primary btn-block" style={{ marginBottom: 12 }} onClick={() => navigate('/baby/record/growth')}>
+        <button className="btn btn-primary btn-block" style={{ marginBottom: 12 }} onClick={() => navigate('/track/record/growth')}>
           <Plus size={16} /> 记录生长
         </button>
         {chartData.length > 1 && (
