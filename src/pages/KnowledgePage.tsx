@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Heart, ChevronDown, ChevronUp, UtensilsCrossed, MessageCircle, ChefHat } from 'lucide-react';
 import {
@@ -13,6 +13,7 @@ export default function KnowledgePage() {
   const [searchParams] = useSearchParams();
   const initialTab = searchParams.get('tab') || 'diet';
   const [tab, setTab] = useState(initialTab);
+  useEffect(() => { const handler = () => { const m = localStorage.getItem('app_mode') || 'pregnancy'; /* mode listener */ setTab(m === 'pregnancy' ? 'diet' : 'babycare'); }; window.addEventListener('modeChange', handler); return () => window.removeEventListener('modeChange', handler); }, []);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [showChat, setShowChat] = useState(false);
   const toggle = (id: string) => setExpanded(expanded === id ? null : id);
