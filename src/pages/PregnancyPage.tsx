@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, Heart, Apple } from 'lucide-react';
+import { ChevronDown, ChevronUp, Heart } from 'lucide-react';
 import { pregnancyWeeks, pregnancyNutrients, pregnancyDietGuide, pregnancySymptoms } from '../data/knowledge';
 import { detailedSymptoms } from '../data/recipes';
 import { loadData, saveData } from '../data/store';
@@ -52,7 +52,7 @@ export default function PregnancyPage() {
       <div className="card">
         <div className="accordion">
           <div className="accordion-header" onClick={() => toggle('diet-basics')}>
-            <span><Apple size={16} style={{ verticalAlign: 'middle', marginRight: 6 }} />基本原则</span>
+            <span>基本原则</span>
             {expanded === 'diet-basics' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </div>
           {expanded === 'diet-basics' && (
@@ -67,7 +67,7 @@ export default function PregnancyPage() {
         </div>
         <div className="accordion">
           <div className="accordion-header" onClick={() => toggle('diet-recommend')}>
-            <span>✅ 推荐食物</span>
+            <span>推荐食物</span>
             {expanded === 'diet-recommend' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </div>
           {expanded === 'diet-recommend' && (
@@ -78,7 +78,7 @@ export default function PregnancyPage() {
         </div>
         <div className="accordion">
           <div className="accordion-header" onClick={() => toggle('diet-avoid')}>
-            <span>⚠️ 避免食物</span>
+            <span>避免食物</span>
             {expanded === 'diet-avoid' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </div>
           {expanded === 'diet-avoid' && (
@@ -89,7 +89,7 @@ export default function PregnancyPage() {
         </div>
         <div className="accordion">
           <div className="accordion-header" onClick={() => toggle('nutrients')}>
-            <span>💊 关键营养素</span>
+            <span>关键营养素</span>
             {expanded === 'nutrients' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </div>
           {expanded === 'nutrients' && (
