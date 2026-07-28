@@ -424,3 +424,100 @@ body { overflow-x: hidden; }
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .fab:active { transform: scale(0.94); }
+
+/* === Apple-style Animations === */
+
+/* Page entry fade */
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-content > * {
+  animation: pageIn 0.35s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* Card stagger */
+.card { animation: cardIn 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+.card:nth-child(1) { animation-delay: 0.00s; }
+.card:nth-child(2) { animation-delay: 0.05s; }
+.card:nth-child(3) { animation-delay: 0.10s; }
+.card:nth-child(4) { animation-delay: 0.15s; }
+.card:nth-child(5) { animation-delay: 0.20s; }
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Bottom nav slide-up */
+@keyframes navIn {
+  from { transform: translateX(-50%) translateY(100%); }
+  to   { transform: translateX(-50%) translateY(0); }
+}
+.bottom-nav {
+  animation: navIn 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Mode switcher pill transition */
+.mode-pill {
+  transition: all 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Record button active press */
+.record-btn {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.record-btn:active {
+  transform: scale(0.96);
+}
+
+/* Accordion smooth expand */
+.accordion-body {
+  animation: expandIn 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
+  overflow: hidden;
+}
+@keyframes expandIn {
+  from { opacity: 0; max-height: 0; }
+  to   { opacity: 1; max-height: 500px; }
+}
+
+/* Modal slide up */
+.modal-overlay {
+  animation: fadeIn 0.2s ease;
+}
+.modal-content {
+  animation: slideUp 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+/* Smooth checkbox toggle */
+.checkbox {
+  transition: all 0.18s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Progress bar smooth fill */
+.progress-bar-fill {
+  transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Tab switcher animation */
+.tab {
+  transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Subtle icon scale on nav active */
+.nav-item.active svg {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Week selector number transition */
+.week-display {
+  transition: all 0.15s ease;
+}
