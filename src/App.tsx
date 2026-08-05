@@ -102,18 +102,22 @@ function Onboarding({ lastMode, onSelect }: { lastMode?: string; onSelect: (m: '
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 32, maxWidth: 480, margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: 48 }}>
-        <div style={{ fontSize: 40, marginBottom: 12 }}>👶</div>
+        <div style={{ width: 56, height: 56, borderRadius: 18, background: 'var(--primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D4956A" strokeWidth="1.5" strokeLinecap="round">
+            <circle cx="12" cy="8" r="4"/><path d="M5 20c0-4 3.1-7 7-7s7 3 7 7"/>
+          </svg>
+        </div>
         <div style={{ fontSize: 22, fontWeight: 680, color: 'var(--text)', marginBottom: 6 }}>育儿助手</div>
         <div style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6 }}>从孕期到宝宝成长的全方位陪伴</div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%', maxWidth: 280 }}>
         <button onClick={() => onSelect('pregnancy')} style={{ padding: '20px 24px', outline: lastMode === 'pregnancy' ? '2px solid var(--accent)' : 'none', borderRadius: 16, border: '0.5px solid var(--border)', background: 'var(--card)', cursor: 'pointer', textAlign: 'left', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
-          <div style={{ fontSize: 28, marginBottom: 6 }}>🤰</div>
+          <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#D4956A', marginBottom: 8 }} />
           <div style={{ fontSize: 16, fontWeight: 600 }}>孕期模式</div>
           <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>周历 · 营养 · 食谱 · 待产</div>
         </button>
         <button onClick={() => onSelect('baby')} style={{ padding: '20px 24px', outline: lastMode === 'baby' ? '2px solid var(--accent)' : 'none', borderRadius: 16, border: '0.5px solid var(--border)', background: 'var(--card)', cursor: 'pointer', textAlign: 'left', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
-          <div style={{ fontSize: 28, marginBottom: 6 }}>👶</div>
+          <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#9B8E7E', marginBottom: 8 }} />
           <div style={{ fontSize: 16, fontWeight: 600 }}>宝宝模式</div>
           <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>记录 · 睡眠 · 成长 · 计划</div>
         </button>
