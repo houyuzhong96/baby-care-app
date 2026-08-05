@@ -151,7 +151,7 @@ export default function KnowledgePage() {
       {tab === 'feeding' && (
         <div>
           <div className="card">
-            <div className="card-header"><span className="card-title">🤱 母乳喂养</span></div>
+            <div className="card-header"><span className="card-title"> 母乳喂养</span></div>
             <div style={{ fontSize: 13, lineHeight: 1.6 }}>
               <p><strong>频率：</strong>{feedingGuide.breastfeeding.frequency_newborn}</p>
               <p><strong>时长：</strong>{feedingGuide.breastfeeding.duration}</p>
@@ -162,7 +162,7 @@ export default function KnowledgePage() {
             </div>
           </div>
           <div className="card">
-            <div className="card-header"><span className="card-title">🍼 配方喂养</span></div>
+            <div className="card-header"><span className="card-title"> 配方喂养</span></div>
             <div style={{ fontSize: 13, lineHeight: 1.6 }}>
               <p><strong>冲泡：</strong>{feedingGuide.formula.preparation}</p>
               <p><strong>用量：</strong>{feedingGuide.formula.amount}</p>
@@ -170,7 +170,7 @@ export default function KnowledgePage() {
             </div>
           </div>
           <div className="card">
-            <div className="card-header"><span className="card-title">🥄 辅食添加</span></div>
+            <div className="card-header"><span className="card-title"> 辅食添加</span></div>
             <div style={{ fontSize: 13, lineHeight: 1.6 }}>
               <p><strong>时机：</strong>{feedingGuide.solids.when}</p>
               <p><strong>首选：</strong>{feedingGuide.solids.first}</p>
@@ -186,7 +186,7 @@ export default function KnowledgePage() {
       {tab === 'sleep' && (
         <div>
           <div className="card">
-            <div className="card-header"><span className="card-title">🌙 各阶段睡眠指南</span></div>
+            <div className="card-header"><span className="card-title"> 各阶段睡眠指南</span></div>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse' }}>
                 <thead>
@@ -213,7 +213,7 @@ export default function KnowledgePage() {
             </div>
           </div>
           <div className="card">
-            <div className="card-header"><span className="card-title">💤 睡眠训练方法</span></div>
+            <div className="card-header"><span className="card-title"> 睡眠训练方法</span></div>
             {sleepTrainingMethods.map((m, i) => (
               <div className="accordion" key={i}>
                 <div className="accordion-header" onClick={() => toggle('sleep-method-' + i)}>
@@ -238,9 +238,9 @@ export default function KnowledgePage() {
 
       {tab === 'bag' && (
         <div>
-          <Checklist listId="bag-mother" title="👩 妈妈用品" icon="" items={hospitalBagList.mother.map(t => ({ text: t }))} />
-          <Checklist listId="bag-baby" title="👶 宝宝用品" icon="" items={hospitalBagList.baby.map(t => ({ text: t }))} />
-          <Checklist listId="bag-other" title="📋 其他" icon="" items={hospitalBagList.others.map(t => ({ text: t }))} />
+          <Checklist listId="bag-mother" title=" 妈妈用品" icon="" items={hospitalBagList.mother.map(t => ({ text: t }))} />
+          <Checklist listId="bag-baby" title=" 宝宝用品" icon="" items={hospitalBagList.baby.map(t => ({ text: t }))} />
+          <Checklist listId="bag-other" title=" 其他" icon="" items={hospitalBagList.others.map(t => ({ text: t }))} />
         </div>
       )}
 
@@ -264,7 +264,7 @@ export default function KnowledgePage() {
             E.A.S.Y. 常规程序 — 来自特蕾西·霍格《实用程序育儿法》
           </div>
           <div className="card">
-            <div className="card-header"><span className="card-title">📋 什么是E.A.S.Y.？</span></div>
+            <div className="card-header"><span className="card-title"> 什么是E.A.S.Y.？</span></div>
             <div style={{ fontSize: 13, lineHeight: 1.6 }}>
               <p><strong>E</strong>at (吃) → <strong>A</strong>ctivity (活动) → <strong>S</strong>leep (睡) → <strong>Y</strong>our time (你的时间)</p>
               <p style={{ marginTop: 8 }}>这是一个结构化但灵活的日常程序，帮助宝宝建立可预测的生活节奏，同时给父母留出自己的时间。</p>
@@ -323,7 +323,7 @@ export default function KnowledgePage() {
                     <div style={{ fontSize: 12, lineHeight: 1.8, color: 'var(--text-secondary)' }}>
                       <p>🌅 早餐：{day.breakfast}</p>
                       <p>☀️ 午餐：{day.lunch}</p>
-                      <p>🌙 晚餐：{day.dinner}</p>
+                      <p> 晚餐：{day.dinner}</p>
                       <p>🍪 加餐：{day.snack}</p>
                     </div>
                   </div>
@@ -381,7 +381,7 @@ export default function KnowledgePage() {
             <div className="card" key={month}>
               <div className="accordion">
                 <div className="accordion-header" onClick={() => toggle('month-' + month)} style={{ borderBottom: 'none' }}>
-                  <span style={{ fontWeight: 600 }}>🗓️ {month}护理要点</span>
+                  <span style={{ fontWeight: 600 }}> {month}护理要点</span>
                   {expanded === 'month-' + month ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </div>
                 {expanded === 'month-' + month && (
@@ -429,7 +429,7 @@ export default function KnowledgePage() {
       {tab === 'breastmilk' && (
         <div>
           <div className="card">
-            <div className="card-header"><span className="card-title">🤱 母乳储存</span></div>
+            <div className="card-header"><span className="card-title"> 母乳储存</span></div>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', fontSize: 13, borderCollapse: 'collapse' }}>
                 <thead><tr style={{ borderBottom: '2px solid var(--border)', textAlign: 'left' }}>
@@ -448,28 +448,28 @@ export default function KnowledgePage() {
           </div>
 
           <div className="card">
-            <div className="card-header"><span className="card-title">📋 哺乳自查清单</span></div>
+            <div className="card-header"><span className="card-title"> 哺乳自查清单</span></div>
             <div style={{ fontSize: 13, lineHeight: 1.6 }}>
               {breastfeedingChecklist.map((item, i) => <p key={i} style={{ padding: '3px 0' }}>{i + 1}. {item}</p>)}
             </div>
           </div>
 
           <div className="card">
-            <div className="card-header"><span className="card-title">⚠️ 胀奶护理</span></div>
+            <div className="card-header"><span className="card-title"> 胀奶护理</span></div>
             <div style={{ fontSize: 13, lineHeight: 1.6 }}>
               {engorgementCare.map((tip, i) => <p key={i} style={{ padding: '3px 0' }}>\u2022 {tip}</p>)}
             </div>
           </div>
 
           <div className="card">
-            <div className="card-header"><span className="card-title">🚨 堵奶处理</span></div>
+            <div className="card-header"><span className="card-title"> 堵奶处理</span></div>
             <div style={{ fontSize: 13, lineHeight: 1.6 }}>
               {blockedDuctCare.map((tip, i) => <p key={i} style={{ padding: '3px 0' }}>\u2022 {tip}</p>)}
             </div>
           </div>
 
           <div className="card" style={{ borderColor: 'var(--danger)' }}>
-            <div className="card-header"><span className="card-title" style={{ color: 'var(--danger)' }}>🆘 乳腺炎警示</span></div>
+            <div className="card-header"><span className="card-title" style={{ color: 'var(--danger)' }}> 乳腺炎警示</span></div>
             <div style={{ fontSize: 13, lineHeight: 1.6 }}>
               <p><strong>症状：</strong>{mastitisSigns.symptoms.join('、')}</p>
               <p style={{ marginTop: 8, fontWeight: 600, color: 'var(--danger)' }}>{mastitisSigns.action}</p>
@@ -477,7 +477,7 @@ export default function KnowledgePage() {
           </div>
 
           <div className="card">
-            <div className="card-header"><span className="card-title">👶 新生儿护理常识</span></div>
+            <div className="card-header"><span className="card-title"> 新生儿护理常识</span></div>
             <div style={{ fontSize: 13, lineHeight: 1.6 }}>
               <p><strong>头部：</strong>{newbornCareBasics.head}</p>
               <p><strong>皮肤：</strong>{newbornCareBasics.skin}</p>

@@ -84,9 +84,9 @@ export default function HomePage() {
               第{currentWeek.trimester === 1 ? '一' : currentWeek.trimester === 2 ? '二' : '三'}孕期 · {currentWeek.babySize}大小 · {currentWeek.babyWeight}
             </div>
             <div style={{ fontSize: 12, lineHeight: 1.7, color: 'var(--text-secondary)', textAlign: 'left' }}>
-              <p style={{ marginBottom: 4 }}><strong>🧬</strong> {currentWeek.development}</p>
-              <p style={{ marginBottom: 4 }}><strong>🤰</strong> {currentWeek.motherChanges}</p>
-              <p style={{ marginBottom: 4 }}><strong>💡</strong> {currentWeek.tips}</p>
+              <p style={{ marginBottom: 4 }}><strong></strong> {currentWeek.development}</p>
+              <p style={{ marginBottom: 4 }}><strong></strong> {currentWeek.motherChanges}</p>
+              <p style={{ marginBottom: 4 }}><strong></strong> {currentWeek.tips}</p>
             </div>
             <button className="btn btn-sm btn-secondary" onClick={() => navigate('/grow')} style={{ marginTop: 8 }}>
               查看完整周历 →

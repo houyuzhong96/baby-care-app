@@ -140,6 +140,7 @@ export default function App() {
           localStorage.setItem('app_mode', m);
           setActiveMode(m);
           window.dispatchEvent(new Event('modeChange'));
+          window.dispatchEvent(new Event('modeChange'));
         }} 
       />
     );
