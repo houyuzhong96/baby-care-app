@@ -130,8 +130,16 @@ function Onboarding({ lastMode, onSelect }: { lastMode?: string; onSelect: (m: '
 export default function App() {
   useEffect(() => { initApiKey(); }, []);
   // Mode state - controls onboarding and navigation
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [showNav, setShowNav] = useState(true);
   const [activeMode, setActiveMode] = useState<string | null>(null);
   const lastMode = localStorage.getItem('app_mode') as string | null;
+
+  useEffect(() => {
+    if (location.pathname.match(/^\/track\/record/)) setShowNav(false);
+    else setShowNav(true);
+  }, [location.pathname]);
 
   // Always show onboarding until user taps
   if (!activeMode) {
@@ -142,19 +150,10 @@ export default function App() {
           localStorage.setItem('app_mode', m);
           setActiveMode(m);
           window.dispatchEvent(new Event('modeChange'));
-          window.dispatchEvent(new Event('modeChange'));
         }} 
       />
     );
   }
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [showNav, setShowNav] = useState(true);
-  
-  useEffect(() => {
-    if (location.pathname.match(/^\/track\/record/)) setShowNav(false);
-    else setShowNav(true);
-  }, [location.pathname]);
 
   return (
     <div className="app-container">
