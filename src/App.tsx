@@ -177,6 +177,18 @@ export default function App() {
             const isActive = (() => {
             if (item.path === '/') return location.pathname === '/';
             const navPath = item.path.split('?')[0];
+            const navQuery = item.path.includes('?') ? item.path.split('?')[1] : null;
+            if (navQuery) {
+              // Check both path AND query param
+              const [qk, qv] = navQuery.split('=');
+              const currentParam = new URLSearchParams(location.search).get(qk);
+              return location.pathname === navPath && currentParam === qv;
+            }
+            // For "知识" tab: match /learn but NOT when tab query is set
+            if (navPath === '/learn') {
+              const currentTab = new URLSearchParams(location.search).get('tab');
+              return location.pathname === navPath && !currentTab;
+            }
             return location.pathname.startsWith(navPath);
           })();
             return (
