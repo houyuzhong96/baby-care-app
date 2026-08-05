@@ -42,6 +42,7 @@ export default function KnowledgePage() {
         <button className={'tab' + (tab === 'bag' ? ' active' : '')} onClick={() => setTab('bag')}>待产清单</button>
         <button className={'tab' + (tab === 'postpartum' ? ' active' : '')} onClick={() => setTab('postpartum')}>产后恢复</button>
         <button className={'tab' + (tab === 'easy' ? ' active' : '')} onClick={() => setTab('easy')}>E.A.S.Y.</button>
+          <button className={'tab' + (tab === 'health' ? ' active' : '')} onClick={() => setTab('health')}>健康</button>
       </div>
 
       {tab === 'diet' && (
