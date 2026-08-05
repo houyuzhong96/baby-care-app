@@ -148,21 +148,10 @@ export default function App() {
   const location = useLocation();
   const [showNav, setShowNav] = useState(true);
   
-  const [appMode, setAppMode] = useState<'pregnancy'|'baby'>(() => (localStorage.getItem('app_mode') as any) || 'pregnancy');
-
-  // Listen for mode changes from HomePage
-  useEffect(() => {
-    const handler = () => setAppMode((localStorage.getItem('app_mode') as any) || 'pregnancy');
-    window.addEventListener('modeChange', handler);
-    return () => window.removeEventListener('modeChange', handler);
-  }, []);
-
   useEffect(() => {
     if (location.pathname.match(/^\/track\/record/)) setShowNav(false);
     else setShowNav(true);
   }, [location.pathname]);
-
-  // Determine which page to show for "Grow" tab based on mode
 
   return (
     <div className="app-container">
@@ -182,7 +171,7 @@ export default function App() {
       <DataSync />
       {showNav && (
         <nav className="bottom-nav">
-          {(appMode === 'pregnancy' ? pregnancyNav : babyNav).map((item: any) => {
+          {(activeMode === 'pregnancy' ? pregnancyNav : babyNav).map((item: any) => {
             const isActive = (() => {
             if (item.path === '/') return location.pathname === '/';
             const navPath = item.path.split('?')[0];
