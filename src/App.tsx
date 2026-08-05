@@ -129,8 +129,6 @@ function Onboarding({ lastMode, onSelect }: { lastMode?: string; onSelect: (m: '
 
 export default function App() {
   useEffect(() => { initApiKey(); }, []);
-  const navigate = useNavigate();
-
   // Mode state - controls onboarding and navigation
   const [activeMode, setActiveMode] = useState<string | null>(null);
   const lastMode = localStorage.getItem('app_mode') as string | null;
@@ -149,6 +147,7 @@ export default function App() {
       />
     );
   }
+  const navigate = useNavigate();
   const location = useLocation();
   const [showNav, setShowNav] = useState(true);
   
