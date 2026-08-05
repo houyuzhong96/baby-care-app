@@ -98,7 +98,7 @@ function DataSync() {
 }
 
 /* ======== App ======== */
-function Onboarding({ onSelect }: { onSelect: (m: 'pregnancy' | 'baby') => void }) {
+function Onboarding({ lastMode, onSelect }: { lastMode?: string; onSelect: (m: 'pregnancy' | 'baby') => void }) {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 32, maxWidth: 480, margin: '0 auto' }}>
       <div style={{ textAlign: 'center', marginBottom: 48 }}>
@@ -107,12 +107,12 @@ function Onboarding({ onSelect }: { onSelect: (m: 'pregnancy' | 'baby') => void 
         <div style={{ fontSize: 13, color: 'var(--text-muted)', lineHeight: 1.6 }}>从孕期到宝宝成长的全方位陪伴</div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%', maxWidth: 280 }}>
-        <button onClick={() => onSelect('pregnancy')} style={{ padding: '20px 24px', borderRadius: 16, border: '0.5px solid var(--border)', background: 'var(--card)', cursor: 'pointer', textAlign: 'left', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
+        <button onClick={() => onSelect('pregnancy')} style={{ padding: '20px 24px', outline: lastMode === 'pregnancy' ? '2px solid var(--accent)' : 'none', borderRadius: 16, border: '0.5px solid var(--border)', background: 'var(--card)', cursor: 'pointer', textAlign: 'left', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
           <div style={{ fontSize: 28, marginBottom: 6 }}>🤰</div>
           <div style={{ fontSize: 16, fontWeight: 600 }}>孕期模式</div>
           <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>周历 · 营养 · 食谱 · 待产</div>
         </button>
-        <button onClick={() => onSelect('baby')} style={{ padding: '20px 24px', borderRadius: 16, border: '0.5px solid var(--border)', background: 'var(--card)', cursor: 'pointer', textAlign: 'left', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
+        <button onClick={() => onSelect('baby')} style={{ padding: '20px 24px', outline: lastMode === 'baby' ? '2px solid var(--accent)' : 'none', borderRadius: 16, border: '0.5px solid var(--border)', background: 'var(--card)', cursor: 'pointer', textAlign: 'left', boxShadow: '0 1px 3px rgba(0,0,0,0.03)' }}>
           <div style={{ fontSize: 28, marginBottom: 6 }}>👶</div>
           <div style={{ fontSize: 16, fontWeight: 600 }}>宝宝模式</div>
           <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>记录 · 睡眠 · 成长 · 计划</div>
@@ -125,28 +125,28 @@ function Onboarding({ onSelect }: { onSelect: (m: 'pregnancy' | 'baby') => void 
 
 export default function App() {
   useEffect(() => { initApiKey(); }, []);
-  const [hasMode, setHasMode] = useState(() => {
-    const saved = localStorage.getItem('app_mode');
-    return saved === 'pregnancy' || saved === 'baby';
-  });
   const navigate = useNavigate();
 
-  if (!hasMode) {
+  // Mode state - controls onboarding and navigation
+  const [activeMode, setActiveMode] = useState<string | null>(null);
+  const lastMode = localStorage.getItem('app_mode') as string | null;
+
+  // Always show onboarding until user taps
+  if (!activeMode) {
     return (
-      <Onboarding onSelect={(m) => {
-        localStorage.setItem('app_mode', m);
-        setHasMode(true);
-        window.dispatchEvent(new Event('modeChange'));
-      }} />
+      <Onboarding 
+        lastMode={lastMode === 'pregnancy' || lastMode === 'baby' ? lastMode : undefined}
+        onSelect={(m) => {
+          localStorage.setItem('app_mode', m);
+          setActiveMode(m);
+          window.dispatchEvent(new Event('modeChange'));
+        }} 
+      />
     );
   }
   const location = useLocation();
   const [showNav, setShowNav] = useState(true);
-  useEffect(() => {
-    const h = () => { const m = localStorage.getItem('app_mode'); if (m === 'pregnancy' || m === 'baby') setHasMode(true); };
-    window.addEventListener('modeChange', h);
-    return () => window.removeEventListener('modeChange', h);
-  }, []);
+  
   const [appMode, setAppMode] = useState<'pregnancy'|'baby'>(() => (localStorage.getItem('app_mode') as any) || 'pregnancy');
 
   // Listen for mode changes from HomePage

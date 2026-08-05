@@ -11,9 +11,28 @@ import KnowledgeChat from '../components/KnowledgeChat';
 
 export default function KnowledgePage() {
   const [searchParams] = useSearchParams();
-  const initialTab = searchParams.get('tab') || 'diet';
-  const [tab, setTab] = useState(initialTab);
-  useEffect(() => setTab(searchParams.get('tab') || ((localStorage.getItem('app_mode')||'pregnancy')==='pregnancy'?'diet':'babycare')), [searchParams]);
+  const [currentMode, setCurrentMode] = useState(() => localStorage.getItem('app_mode') || 'pregnancy');
+  const [tab, setTab] = useState(() => {
+    const urlTab = searchParams.get('tab');
+    return urlTab || (currentMode === 'pregnancy' ? 'diet' : 'babycare');
+  });
+
+  // Listen for mode changes and reset tab
+  useEffect(() => {
+    const h = () => {
+      const m = localStorage.getItem('app_mode') || 'pregnancy';
+      setCurrentMode(m);
+      setTab(m === 'pregnancy' ? 'diet' : 'babycare');
+    };
+    window.addEventListener('modeChange', h);
+    return () => window.removeEventListener('modeChange', h);
+  }, []);
+
+  // Listen for URL param changes
+  useEffect(() => {
+    const urlTab = searchParams.get('tab');
+    if (urlTab) setTab(urlTab);
+  }, [searchParams]);
   useEffect(() => { const handler = () => { const m = localStorage.getItem('app_mode') || 'pregnancy'; /* mode listener */ setTab(m === 'pregnancy' ? 'diet' : 'babycare'); }; window.addEventListener('modeChange', handler); return () => window.removeEventListener('modeChange', handler); }, []);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [showChat, setShowChat] = useState(false);
