@@ -33,7 +33,7 @@ export default function KnowledgePage() {
     const urlTab = searchParams.get('tab');
     if (urlTab) setTab(urlTab);
   }, [searchParams]);
-  useEffect(() => { const handler = () => { const m = localStorage.getItem('app_mode') || 'pregnancy'; /* mode listener */ setTab(m === 'pregnancy' ? 'diet' : 'babycare'); }; window.addEventListener('modeChange', handler); return () => window.removeEventListener('modeChange', handler); }, []);
+  useEffect(() => { const handler = () => { const m = localStorage.getItem('app_mode') || 'pregnancy'; setCurrentMode(m); setTab(m === 'pregnancy' ? 'diet' : 'babycare'); }; window.addEventListener('modeChange', handler); return () => window.removeEventListener('modeChange', handler); }, []);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [showChat, setShowChat] = useState(false);
   const toggle = (id: string) => setExpanded(expanded === id ? null : id);
