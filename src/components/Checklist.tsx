@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Check, ChevronDown, ChevronUp } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp, Plus, X } from 'lucide-react';
 import { loadData, saveData } from '../data/store';
 
 interface Props {
@@ -23,10 +23,22 @@ export default function Checklist({ listId, title, icon, items: initialItems }: 
     return initialItems.map(item => ({ text: item.text, checked: item.checked ?? false }));
   });
   const [expanded, setExpanded] = useState(true);
+  const [newItemText, setNewItemText] = useState('');
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     saveData('checklist_' + listId, items);
   }, [items, listId]);
+
+  const removeItem = (index: number) => {
+    setItems(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const addItem = () => {
+    if (!newItemText.trim()) return;
+    setItems(prev => [...prev, { text: newItemText.trim(), checked: false }]);
+    setNewItemText('');
+  };
 
   const toggleItem = (index: number) => {
     setItems(prev => prev.map((item, i) => i === index ? { ...item, checked: !item.checked } : item));
@@ -44,7 +56,12 @@ export default function Checklist({ listId, title, icon, items: initialItems }: 
             <span style={{ fontWeight: 600 }}>{title}</span>
             <span className="chip chip-success">{checkedCount}/{items.length}</span>
           </span>
-          {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          <div style={{ display: 'flex', gap: 4 }}>
+            <button onClick={(e) => { e.stopPropagation(); setEditing(!editing); }} style={{ border: 'none', background: 'none', cursor: 'pointer', color: editing ? 'var(--accent)' : 'var(--text-muted)', fontSize: 12, padding: '2px 6px', borderRadius: 4 }}>
+              {editing ? '完成' : '编辑'}
+            </button>
+            {expanded ? <ChevronUp size={16} style={{ cursor: 'pointer' }} /> : <ChevronDown size={16} style={{ cursor: 'pointer' }} />}
+          </div>
         </div>
         {expanded && (
           <div>
@@ -83,8 +100,19 @@ export default function Checklist({ listId, title, icon, items: initialItems }: 
                 }}>
                   {item.text}
                 </span>
+                {editing && (
+                  <button onClick={(e) => { e.stopPropagation(); removeItem(i); }} style={{ border: 'none', background: 'none', color: '#ccc', cursor: 'pointer', padding: 2, flexShrink: 0 }}>
+                    <X size={14} />
+                  </button>
+                )}
               </div>
             ))}
+          {editing && (
+              <div style={{ display: 'flex', gap: 6, marginTop: 10 }}>
+                <input className="form-input" value={newItemText} onChange={e => setNewItemText(e.target.value)} onKeyDown={e => { e.stopPropagation(); if (e.key === 'Enter') addItem(); }} placeholder="添加新项目..." style={{ flex: 1, fontSize: 12 }} />
+                <button className="btn btn-sm btn-primary" onClick={addItem}><Plus size={14} /></button>
+              </div>
+            )}
           </div>
         )}
       </div>

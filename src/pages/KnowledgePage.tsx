@@ -55,8 +55,6 @@ export default function KnowledgePage() {
       <div className="tabs" style={{ flexWrap: 'wrap' }}>
         <button className={'tab' + (tab === 'diet' ? ' active' : '')} onClick={() => setTab('diet')}>孕期饮食</button>
         <button className={'tab' + (tab === 'recipes' ? ' active' : '')} onClick={() => setTab('recipes')}><UtensilsCrossed size={14} style={{ verticalAlign: 'middle', marginRight: 4 }} />孕期食谱</button>
-        <button className={'tab' + (tab === 'chinese' ? ' active' : '')} onClick={() => setTab('chinese')}><ChefHat size={14} style={{ verticalAlign: 'middle', marginRight: 4 }} />中式食谱</button>
-        <button className={'tab' + (tab === 'feeding' ? ' active' : '')} onClick={() => setTab('feeding')}>宝宝喂养</button>
         <button className={'tab' + (tab === 'sleep' ? ' active' : '')} onClick={() => setTab('sleep')}>宝宝睡眠</button>
         <button className={'tab' + (tab === 'bag' ? ' active' : '')} onClick={() => setTab('bag')}>待产清单</button>
         <button className={'tab' + (tab === 'postpartum' ? ' active' : '')} onClick={() => setTab('postpartum')}>产后恢复</button>
