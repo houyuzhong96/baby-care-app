@@ -1,12 +1,14 @@
 {
-  "name": "育儿助手",
-  "short_name": "育儿助手",
-  "description": "从孕期到宝宝成长的全面育儿辅助工具",
-  "start_url": "./index.html",
+  "name": "\u80b2\u513f\u52a9\u624b",
+  "short_name": "\u80b2\u513f\u52a9\u624b",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#f5f5f7",
-  "theme_color": "#4a90d9",
+  "background_color": "#FAFAF6",
+  "theme_color": "#D4956A",
   "icons": [
-    { "src": "/vite.svg", "sizes": "any" }
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192"
+    }
   ]
 }
