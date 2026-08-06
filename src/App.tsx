@@ -8,6 +8,7 @@ import PregnancyPage from './pages/PregnancyPage';
 import KnowledgePage from './pages/KnowledgePage';
 import HealthPage from './pages/HealthPage';
 import DevelopmentPage from './pages/DevelopmentPage';
+import RecipesPage from "./pages/RecipesPage";
 import { initApiKey, pushToCloud, pullFromCloud, setSyncUrl, getSyncUrl } from './data/sync';
 
 /* ======== Error Boundary ======== */
@@ -32,13 +33,15 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | 
 const pregnancyNav = [
   { path: '/', icon: Home, label: '首页' },
   { path: '/grow', icon: Sprout, label: '周历' },
-  { path: '/learn?tab=recipes', icon: ChefHat, label: '食谱' },
+  { path: '/recipes', icon: ChefHat, label: '食谱' },
+  { path: '/recipes', icon: ChefHat, label: '食谱' },
   { path: '/learn', icon: BookOpen, label: '知识' },
 ];
 const babyNav = [
   { path: '/', icon: Home, label: '首页' },
   { path: '/track', icon: PenLine, label: '记录' },
   { path: '/development', icon: Sprout, label: '成长' },
+  { path: '/recipes', icon: ChefHat, label: '食谱' },
   { path: '/learn', icon: BookOpen, label: '知识' },
 ];
 
@@ -167,6 +170,7 @@ export default function App() {
             <Route path="/health" element={<HealthPage />} />
             <Route path="/development" element={<DevelopmentPage />} />
             <Route path="/learn" element={<KnowledgePage />} />
+            <Route path="/recipes" element={<RecipesPage />} />
           </Routes>
         </ErrorBoundary>
       </div>
