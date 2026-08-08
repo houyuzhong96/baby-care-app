@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { Home, BookOpen, Sprout, PenLine, RefreshCw } from 'lucide-react';
+import { Home, BookOpen, Sprout, PenLine, RefreshCw, ChefHat } from 'lucide-react';
 import { Component, type ReactNode } from 'react';
 import HomePage from './pages/HomePage';
 import BabyCarePage from './pages/BabyCarePage';
@@ -33,6 +33,7 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | 
 const pregnancyNav = [
   { path: '/', icon: Home, label: '首页' },
   { path: '/grow', icon: Sprout, label: '周历' },
+  { path: '/recipes', icon: ChefHat, label: '食谱' },
   { path: '/learn', icon: BookOpen, label: '知识' },
 ];
 const babyNav = [
@@ -137,6 +138,15 @@ export default function App() {
   const lastMode = localStorage.getItem('app_mode') as string | null;
 
   useEffect(() => {
+    const h = () => {
+      const m = localStorage.getItem('app_mode');
+      if (m === 'pregnancy' || m === 'baby') setActiveMode(m);
+    };
+    window.addEventListener('modeChange', h);
+    return () => window.removeEventListener('modeChange', h);
+  }, []);
+
+  useEffect(() => {
     if (location.pathname.match(/^\/track\/record/)) setShowNav(false);
     else setShowNav(true);
   }, [location.pathname]);
@@ -176,22 +186,8 @@ export default function App() {
         <nav className="bottom-nav">
           {(activeMode === 'pregnancy' ? pregnancyNav : babyNav).map((item: any) => {
             const isActive = (() => {
-            if (item.path === '/') return location.pathname === '/';
-            const navPath = item.path.split('?')[0];
-            const navQuery = item.path.includes('?') ? item.path.split('?')[1] : null;
-            if (navQuery) {
-              // Check both path AND query param
-              const [qk, qv] = navQuery.split('=');
-              const currentParam = new URLSearchParams(location.search).get(qk);
-              return location.pathname === navPath && currentParam === qv;
-            }
-            // For "知识" tab: match /learn but NOT when tab query is set
-            if (navPath === '/learn') {
-              const currentTab = new URLSearchParams(location.search).get('tab');
-              return location.pathname === navPath && !currentTab;
-            }
-            return location.pathname.startsWith(navPath);
-          })();
+              return item.path === '/' ? location.pathname === '/' : location.pathname.startsWith(item.path);
+            })();
             return (
               <button key={item.path} className={'nav-item' + (isActive ? ' active' : '')} onClick={() => navigate(item.path)}>
                 <item.icon size={20} />

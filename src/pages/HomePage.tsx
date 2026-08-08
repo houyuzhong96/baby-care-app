@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Baby, Droplets, Moon, Activity, TrendingUp, Heart, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
 import { loadData, saveData } from '../data/store';
@@ -41,7 +41,20 @@ export default function HomePage() {
     return Math.floor((Date.now() - birth.getTime()) / (30.44 * 86400000));
   };
 
-  const switchMode = (m: 'pregnancy' | 'baby') => { setMode(m); localStorage.setItem('app_mode', m); };
+  const switchMode = (m: 'pregnancy' | 'baby') => {
+    setMode(m);
+    localStorage.setItem('app_mode', m);
+    window.dispatchEvent(new Event('modeChange'));
+  };
+
+  useEffect(() => {
+    const h = () => {
+      const m = localStorage.getItem('app_mode');
+      if (m === 'pregnancy' || m === 'baby') setMode(m);
+    };
+    window.addEventListener('modeChange', h);
+    return () => window.removeEventListener('modeChange', h);
+  }, []);
 
   const currentWeek = pregnancyWeeks.find(w => w.week === pregWeek) || pregnancyWeeks[0];
   const advices = profile ? generateAdvice({ profile, feeds, sleeps, growths }) : [];
@@ -95,7 +108,7 @@ export default function HomePage() {
 
           {/* Quick links */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 10 }}>
-            <button className="btn btn-secondary" onClick={() => navigate('/learn?tab=recipes')} style={{ fontSize: 12, justifyContent: 'flex-start', gap: 6 }}>
+            <button className="btn btn-secondary" onClick={() => navigate('/recipes')} style={{ fontSize: 12, justifyContent: 'flex-start', gap: 6 }}>
               孕期食谱
             </button>
             <button className="btn btn-secondary" onClick={() => navigate('/learn?tab=bag')} style={{ fontSize: 12, justifyContent: 'flex-start', gap: 6 }}>

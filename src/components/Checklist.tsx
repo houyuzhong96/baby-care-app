@@ -13,14 +13,12 @@ interface Props {
 export default function Checklist({ listId, title, icon, items: initialItems }: Props) {
   const [items, setItems] = useState(() => {
     const saved = loadData<{ text: string; checked: boolean }[] | null>('checklist_' + listId, null);
-    if (saved) {
-      // Merge saved state with current items
-      return initialItems.map((item, i) => ({
-        text: item.text,
-        checked: saved[i]?.checked ?? item.checked ?? false,
-      }));
-    }
-    return initialItems.map(item => ({ text: item.text, checked: item.checked ?? false }));
+    const defaults = initialItems.map(item => ({ text: item.text, checked: item.checked ?? false }));
+    if (!saved || saved.length === 0) return defaults;
+    // 保留用户增删后的内容，同时把后加入的默认项目补充回来
+    const savedTexts = new Set(saved.map(s => s.text));
+    const newDefaults = defaults.filter(d => !savedTexts.has(d.text));
+    return [...saved, ...newDefaults];
   });
   const [expanded, setExpanded] = useState(true);
   const [newItemText, setNewItemText] = useState('');

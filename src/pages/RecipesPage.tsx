@@ -91,7 +91,7 @@ export default function RecipesPage() {
                     <p><strong>食材：</strong>{r.ingredients}</p>
                     <p style={{ marginTop: 4 }}><strong>做法：</strong>{r.method}</p>
                     <p style={{ marginTop: 4, color: "var(--success)" }}><strong>营养：</strong>{r.nutrition}</p>
-                    <p style={{ marginTop: 4, fontSize: 12, color: "var(--text-secondary)" }}>💡 {r.tips}</p>
+                    <p style={{ marginTop: 4, fontSize: 12, color: "var(--text-secondary)" }}>小贴士：{r.tips}</p>
                   </div>
                 )}
               </div>
@@ -128,7 +128,7 @@ export default function RecipesPage() {
                 <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 4 }}>第{i + 1}天</div>
                 {(["breakfast", "lunch", "dinner", "snack"] as const).map(meal => (
                   <div key={meal} style={{ fontSize: 12, color: "var(--text-secondary)", padding: "1px 0" }}>
-                    {meal === "breakfast" ? "🌅" : meal === "lunch" ? "☀️" : meal === "dinner" ? "🌙" : "🍪"} {day[meal]}
+                    {meal === "breakfast" ? "早餐" : meal === "lunch" ? "午餐" : meal === "dinner" ? "晚餐" : "加餐"}：{day[meal]}
                   </div>
                 ))}
               </div>

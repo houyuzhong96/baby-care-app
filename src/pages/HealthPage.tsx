@@ -35,7 +35,7 @@ export default function HealthPage() {
                   <div className="accordion-body">
                     <p style={{ marginBottom: 8 }}><strong>症状：</strong>{illness.symptoms}</p>
                     <p style={{ marginBottom: 8 }}><strong style={{ color: 'var(--success)' }}>家庭护理：</strong>{illness.care}</p>
-                    <p style={{ color: 'var(--danger)' }}><strong>🚨 需就医：</strong>{illness.seeDoctor}</p>
+                    <p style={{ color: 'var(--danger)' }}><strong>需就医：</strong>{illness.seeDoctor}</p>
                   </div>
                 )}
               </div>
